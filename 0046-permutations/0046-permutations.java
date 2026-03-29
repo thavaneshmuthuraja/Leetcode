@@ -2,7 +2,7 @@ class Solution {
     
     List<List<Integer>>res=new ArrayList<>();
 
-    void func(int []nums,Map<Integer,Boolean>vis,List<Integer>temp,int n)
+    void func(int []nums,boolean []vis,List<Integer>temp,int n)
     {
         if(temp.size()==n)
         {
@@ -12,9 +12,9 @@ class Solution {
 
         for(int i=0;i<n;i++)
         {
-            if(!vis.getOrDefault(nums[i],false))
+            if(!vis[i])
             {
-                vis.put(nums[i],true);
+                vis[i]=true;
 
                 temp.add(nums[i]);
 
@@ -22,13 +22,13 @@ class Solution {
 
                 temp.remove(temp.size()-1);
 
-                vis.put(nums[i],false);
+                vis[i]=false;
             }
         }
     }
     public List<List<Integer>> permute(int[] nums) {
 
-        Map<Integer,Boolean>vis=new HashMap<>();
+        boolean []vis=new boolean [nums.length+1];
 
         func(nums,vis,new ArrayList<Integer>(),nums.length);
 
