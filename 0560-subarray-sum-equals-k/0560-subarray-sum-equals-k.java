@@ -9,14 +9,14 @@ class Solution {
 
         for(int i=0;i<nums.length;i++)
         {
-            pre+=nums[i];
 
-            mp.put(pre,mp.getOrDefault(pre,0)+1);
+            pre+=nums[i];
 
            int val= mp.getOrDefault(pre-k,0);
 
             if(val!=0) c+=val; 
 
+            mp.put(pre,mp.getOrDefault(pre,0)+1);
         }
 
         return c;
