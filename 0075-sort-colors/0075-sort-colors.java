@@ -1,35 +1,34 @@
 class Solution {
+
+    void swap(int a,int b,int []nums)
+    {
+        int t=nums[a];
+        nums[a]=nums[b];
+        nums[b]=t;
+    }
     public void sortColors(int[] nums) {
 
-        int zero=0,ones=0,twos=0;
+    int low =0,hi=nums.length-1;
 
-        for(int i=0;i<nums.length;i++)
+        for(int i=0;i<=hi;i++)
         {
-            if(nums[i]==0) zero++;
+            //low zone i met low then put low zone
 
-            if(nums[i]==1) ones++;
+            if(nums[i]==0) 
+            {
+                swap(i,low,nums);
 
-            if(nums[i]==2) twos++;
-        }
+                low++;
+            }
+            //high zone i met put high zone;
+            if(nums[i]==2) 
+            {
+                swap(i,hi,nums);
+                hi--;
+                //i--;
+            }
 
-        for(int i=0;i<nums.length;i++)
-        {
-            if(zero!=0) {
-                nums[i]=0;
-                zero--;
-                continue;
-            }
-            if(ones!=0) {
-                nums[i]=1;
-                ones--;
-                continue;
-            }
-            if(twos!=0) {
-                nums[i]=2;
-                twos--;
-                continue;
-            }
-        }
+          }
         
     }
 }
