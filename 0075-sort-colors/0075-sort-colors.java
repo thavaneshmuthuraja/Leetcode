@@ -25,6 +25,7 @@ class Solution {
             {
                 swap(i,hi,nums);
                 hi--;
+                //i need to check because swap value be '0' or '1' so we need to check that index so dont move  
                 i--;
             }
 
