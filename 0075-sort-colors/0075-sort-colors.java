@@ -25,7 +25,7 @@ class Solution {
             {
                 swap(i,hi,nums);
                 hi--;
-                //i--;
+                i--;
             }
 
           }
