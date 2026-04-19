@@ -8,7 +8,7 @@ class Solution {
     public int[] sortArrayByParityII(int[] nums) {
         int n=nums.length, odd=1,even=0;
 
-        Arrays.sort(nums);
+        //Arrays.sort(nums);
 
         while(even<nums.length && odd<nums.length)
         {
