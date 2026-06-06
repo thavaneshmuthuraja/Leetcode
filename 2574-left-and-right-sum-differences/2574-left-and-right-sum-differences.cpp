@@ -15,7 +15,6 @@ public:
         {
             int val= i-1<0 ? 0:p[i-1];
             int right=p[n]-val;
-            cout<<right;
     
             nums[i]=abs(right-p[i]);
         }
