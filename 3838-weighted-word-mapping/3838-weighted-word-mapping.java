@@ -6,9 +6,9 @@ class Solution {
         for(String str: words)
         {
             int sum=0;
-            for(char ch:str.toCharArray())
+            for(int i=0;i<str.length();i++)
             {
-                 sum+=weights[ch-'a'];
+                 sum+=weights[str.charAt(i)-'a'];
             }
             sum=sum%26;
             ans.append((char)(25-sum+'a'));
