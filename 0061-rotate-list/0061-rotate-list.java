@@ -9,53 +9,44 @@
  * }
  */
 class Solution {
-
-    int len=0;
-    ListNode rev(ListNode prev,ListNode cur)
+    int func(ListNode temp)
     {
-        if(cur==null)
+        int cnt=0;
+        while(temp!=null)
         {
-            return prev;
+            temp=temp.next;
+            cnt++;
         }
-        ListNode next=cur.next;
-        cur.next=prev;
-        prev=cur;
-        len++;
-        return rev(cur,next);
+        return cnt;
     }
     public ListNode rotateRight(ListNode head, int k) {
-        if(head==null) return null;
-        ListNode newHead=rev(null,head);
-        k=k%len;
+        if(head==null)
+        {
+            return null;
+        }
+        int len=func(head);
+        k%=len;
         if(k==0)
         {
-            return rev(null,newHead);
+            return head;
         }
-        ListNode ans1=null;
-        ListNode ans2=null;
-        ListNode t=newHead;
+        k=len-k;
         int c=1;
-        while(t!=null)
+        ListNode t=head;
+        ListNode newHead=null;
+        ListNode newTail=null;
+        while(t.next!=null)
         {
             if(c==k)
             {
-                ListNode v=t.next;
-                t.next=null;
-                ans1=rev(null,newHead);
-                ans2=rev(null,v);
-                break;
+                newHead=t.next;
+                newTail=t;
             }
-            t=t.next;
             c++;
-        }
-        t=ans1;
-        while(t.next!=null)
-        {
             t=t.next;
         }
-        t.next=ans2;
-
-        return ans1;
-
+        t.next=head;
+        newTail.next=null;
+        return newHead;
     }
 }
