@@ -1,48 +1,69 @@
 class Solution {
 
-    public void dfs(int node,boolean []vis,ArrayList<ArrayList<Integer>>adj)
+    public int find(int []par,int rep)
     {
-        vis[node]=true;
-        for(int n:adj.get(node))
+        if(rep==par[rep])
         {
-            if(!vis[n])
-            {
-                dfs(n,vis,adj);
-            }
+            return rep;
         }
+        return par[rep]=find(par,par[rep]);
+    }
+
+    public void unite(int []rank,int[]par,int x,int y)
+    {
+        int repx=find(par,x);
+        int repy=find(par,y);
+
+        if(rank[repx]>rank[repy])
+        {
+            par[repy]=repx;
+
+        }else if(rank[repx]<rank[repy])
+        {
+            par[repx]=repy;
+
+        }else
+        {
+            rank[repx]++;
+            par[repy]=repx;
+        }
+
     }
     public int makeConnected(int n, int[][] connections) {
+
         
-        int cables=connections.length,nCon=0;
-        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
-        boolean []vis=new boolean[n];
+        if(connections.length<n-1)
+        {
+            return -1;
+        }
+
+        int []par=new int[n];
+        int []rank=new int[n];
+        Arrays.fill(rank,0);
 
         for(int i=0;i<n;i++)
         {
-            adj.add(new ArrayList<>());
+            par[i]=i;
         }
 
-        for(int []val:connections)
+        for(int []c:connections)
         {
-            int u=val[0];
-            int v=val[1];
-            adj.get(u).add(v);
-            adj.get(v).add(u);
-        }
-        if(n-1>cables)
-        {
-            return -1;
-        }else
-        {
-            for(int i=0;i<n;i++)
+            if(find(par,c[0])!=find(par,c[1]))
             {
-
-                if(!vis[i]){
-                nCon++;
-                dfs(i,vis,adj);
-                }
+                unite(rank,par,c[0],c[1]);
             }
         }
-        return nCon-1;
+        int ncon=0;
+
+        for(int i=0;i<n;i++)
+        {
+            if(par[i]==i)
+            {
+                ncon++;
+            }
+        }
+
+        return   ncon-1;
+        
     }
 }
