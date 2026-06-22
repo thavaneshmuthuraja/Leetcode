@@ -20,6 +20,7 @@ class Solution {
         }
         //int rem=k-(arr[h]-(h+1));
         //if(rem==0) return arr[arr.length-1]+k;
-        return k+1+h;
+        //because low is just one index forward so that we use 
+        return l+k;
     }
 }
