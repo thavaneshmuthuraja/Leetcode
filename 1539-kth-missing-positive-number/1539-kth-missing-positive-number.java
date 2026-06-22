@@ -3,7 +3,7 @@ class Solution {
 
         int l=0,h=arr.length-1;
 
-        if(arr[0]>k) return k;
+        //if(arr[0]>k) return k;
 
         while(l<=h)
         {
@@ -18,8 +18,8 @@ class Solution {
                 h=mid-1;
             }
         }
-        int rem=k-(arr[h]-(h+1));
-        if(rem==0) return arr[arr.length-1]+k;
-        return arr[h]+rem;
+        //int rem=k-(arr[h]-(h+1));
+        //if(rem==0) return arr[arr.length-1]+k;
+        return k+1+h;
     }
 }
