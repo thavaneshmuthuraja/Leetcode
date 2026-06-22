@@ -4,18 +4,18 @@ class Solution {
 
         for(int i=0;i<m;i++)
         {
-            String t="";
+            StringBuilder t=new  StringBuilder("");
             for(int j=0;j<n;j++)
             {
                 if(i==0 || j==n-1)
                 {
-                    t+=".";
+                    t.append(".");
                 }else
                 {
-                    t+="#";
+                    t.append("#");
                 }
             }
-            ans[i]=t;
+            ans[i]=t.toString();
         }
         return ans;
     }
