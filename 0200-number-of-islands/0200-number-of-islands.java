@@ -1,37 +1,43 @@
 class Solution {
 
-    int [][]dict={{0,1},{1,0},{0,-1},{-1,0}};
+    int [][]dir={{0,-1},{0,1},{1,0},{-1,0}};
 
-    void dfs (int r,int c,char [][]grid)
+    public void dfs(int i,int j,char [][]grid,boolean [] []vis )
     {
-        grid[r][c]='#';
+        int n=grid.length;
+         int m=grid[i].length;
 
-        for(int i=0;i<4;i++)
+        vis[i][j]=true;
+
+        for(int k=0;k<4;k++)
         {
-            int nr=r+dict[i][0];
-            int nc=c+dict[i][1];
-            if(nr<grid.length && nc<grid[0].length && nr>=0 && nc>=0 && grid[nr][nc]=='1' && grid[nr][nc]!='#')
+            int nr=i+dir[k][0];
+            int nc=j+dir[k][1];
+
+
+            if(nr<n && nr>=0 && nc<m && nc>=0 && grid[nr][nc]=='1' && !vis[nr][nc] )
             {
-                dfs(nr,nc,grid);
+                dfs(nr,nc,grid,vis);
             }
         }
-    
-    }
-    public int numIslands(char[][] grid) {
+    } 
+    public int numIslands(char [][]grid) {
 
-        int count =0,n=grid.length,m=grid[0].length;
+        int cnt=0;
+        boolean [][]vis=new boolean [grid.length][grid[0].length];
 
-        for(int i=0;i<n;i++)
+        for(int i=0;i<grid.length;i++)
         {
-            for(int j=0;j<m;j++)
+            for(int j=0;j<grid[i].length;j++)
             {
-                if(grid[i][j]=='1')
+                if(!vis[i][j] && grid[i][j]!='0')
                 {
-                    count++;
-                    dfs(i,j,grid);
+                   cnt++;
+                   dfs(i,j,grid,vis);
                 }
             }
         }
-        return count;
+
+        return cnt;
     }
 }
