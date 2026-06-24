@@ -1,22 +1,19 @@
 # Write your MySQL query statement below
-select q.query_name,
+select query_name,
 round
 (
-(
-    select sum(q1.rating/q1.position) as val from Queries q1 
-    where q.query_name=q1.query_name
-)
-/count(q.query_name),
-2) 
+    avg(rating*1.0/position)
+    
+,2) 
 as "quality", 
 
 round(
-(
-    select count(q2.rating) from Queries q2 
-    where q.query_name=q2.query_name and q2.rating<3
-)
-/count(q.query_name) *100,
+avg(
+    case 
+        when rating<3 then 1
+        else 0
+    end) *100,
 2)
 as "poor_query_percentage"
-from Queries q 
-group by (q.query_name) ;
+from Queries  
+group by (query_name) ;
