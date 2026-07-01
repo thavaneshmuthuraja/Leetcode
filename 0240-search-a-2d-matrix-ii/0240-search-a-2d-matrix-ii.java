@@ -19,11 +19,20 @@ class Solution {
         return false;
     }
     public boolean searchMatrix(int[][] mat, int t) {
-        int n=mat[0].length,m=mat.length;
+        int row=0,col=mat[0].length-1;
 
-        for(int i=0;i<mat.length;i++)
+        while(row<mat.length && row>=0 && col<mat[0].length && col>=0)
         {
-            if(func(mat[i],t)) return true;
+            if(mat[row][col]<t)
+            {
+                row++;
+            }else if(mat[row][col]>t)
+            {
+                col--;
+            }else 
+            {
+                return true;
+            }
         }
 
         return false;
