@@ -14,7 +14,7 @@ class Solution {
             len=Math.min(len,cnt);
         }
 
-        len=len==(int)1e9 ? 0:len;
+        //len=len==(int)1e9 ? 0:len;
 
         return strs[0].substring(0,len);
     }
