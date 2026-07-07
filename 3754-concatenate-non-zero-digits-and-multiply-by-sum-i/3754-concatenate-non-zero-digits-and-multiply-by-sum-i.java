@@ -5,7 +5,7 @@ class Solution {
         String str=String.valueOf(n);
         while(st<str.length())
         {
-            long v=1L*(str.charAt(st)-'0');
+            long v=str.charAt(st)-'0';
             if(v!=0)
             {
                 ans=ans*10+v;
