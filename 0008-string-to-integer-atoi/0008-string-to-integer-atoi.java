@@ -1,43 +1,35 @@
 class Solution {
     public int myAtoi(String s) {
+        int i = 0;
 
-        s=s.strip();
+        while (i < s.length() && s.charAt(i) == ' ')
+            i++;
 
-        StringBuilder ans=new StringBuilder();
+        int sign = 1;
 
-        boolean pos=true;
+        if (i < s.length() &&
+            (s.charAt(i) == '-' || s.charAt(i) == '+')) {
 
-        for(int i=0;i<s.length();i++)
-        {
-            char ch=s.charAt(i);
-            if(ch=='-' && i==0){
-                pos=false;
-                continue;
-            }
-            if(ch=='+' && i==0) continue;
-            if(ch>='0' && ch<='9')
-            {
-                ans.append(ch);
-            }else
-            {
-                break;
-            }
+            sign = (s.charAt(i) == '-') ? -1 : 1;
+            i++;
         }
 
-        long val=0,cnt=0;
+        return helper(s, i, 0, sign);
+    }
 
-        for(int i=ans.length()-1;i>=0;i--)
-        {
-            val+=(ans.charAt(i)-'0')*Math.pow(10,cnt++);
-        }
+    public static int helper(String s, int i, long num, int sign) {
 
-        if(!pos)
-        {
-            val=-val;
-        }
+        if (i >= s.length() || !Character.isDigit(s.charAt(i)))
+            return sign * (int) num;
 
-        if (val > 2147483647) return 2147483647;
-        if (val < -2147483648) return -2147483648;
-        return (int)val;
+        num = num * 10 + (s.charAt(i) - '0');
+
+        if (num * sign >= Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+
+        if (num * sign <= Integer.MIN_VALUE)
+            return Integer.MIN_VALUE;
+
+        return helper(s, i + 1, num, sign);
     }
 }
