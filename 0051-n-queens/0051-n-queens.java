@@ -1,84 +1,72 @@
 class Solution {
 
-    List<List<String>> res=new ArrayList<>();
+    List<List<String>> ans=new ArrayList<>();
 
-    boolean check(boolean [][]vis,int r,int c)
+    boolean check(int r,int c,boolean [][]vis)
     {
-        int len=vis.length;
-        
-
-        for(int i=0;i<len;i++)
+        int n=vis.length;
+        boolean res=true;
+        //same row back check
+        for(int i=c-1;i>=0;i--)
         {
-            if(c!=i && vis[r][i]) return false;
-            if(r!=i && vis[i][c]) return false;
-        //System.out.println("come");
+            if(vis[r][i]) res=false;
         }
-        //right diagonal
-        int tr=r,tc=c;
-        while(tr>=0 && tc>=0)
+        //same column top check
+        for(int i=r-1;i>=0;i--)
         {
-            if( tr!=r && tc!=c && vis[tr][tc]) return false;
-            tr--;
-            tc--;
-        //System.out.println("come");
+            if(vis[i][c]) res=false;
         }
-        
-        tr=r;tc=c;
 
-        while(tr>=0 && tc<len)
+
+        //above check for diagonal
+
+        for(int i=r-1,j=c-1;i>=0 && j>=0 ;i--,j--)
         {
-            if(tr!=r && tc!=c && vis[tr][tc]) return false;
-
-            tr--;
-            tc++;
-        //System.out.println("come");
+            if(vis[i][j]) res=false;
         }
-        return true;
+        for(int i=r-1,j=c+1;i>=0 && j<n ;i--,j++)
+        {
+            if(vis[i][j]) res=false;
+        }
+
+        return res;
+
     }
 
-    void func(int r,int n,boolean  [][]vis)
+    void func(int r,int n,List<String>val,boolean [][]vis)
     {
-        if(r==n) 
-        {
-            List<String> val=new ArrayList<>();
-            for(int i=0;i<vis.length;i++)
-            {
-                StringBuilder temp=new StringBuilder();
-
-
-                for(int j=0;j<vis.length;j++)
-                {
-                    if(vis[i][j]) temp.append('Q');
-                    else 
-                    temp.append('.');    
-                }
-                //System.out.println(val);
-                val.add(temp.toString());
-            }
-            res.add(val);
+        if(n==r) {
+            ans.add(new ArrayList<>(val));
             return ;
         }
 
+        StringBuilder temp=new StringBuilder();
 
         for(int i=0;i<n;i++)
         {
-            vis[r][i]=true;
-            if(check(vis,r,i))
+            temp.append('.');
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            if(check(r,i,vis))
             {
-                func(r+1,n,vis);
-                //System.out.println("come");
+                temp.setCharAt(i,'Q');
+                val.add(temp.toString());
+                vis[r][i]=true;
+                func(r+1,n,val,vis);
+                val.remove(val.size()-1);
+                temp.setCharAt(i,'.');
+                vis[r][i]=false;
             }
-            vis[r][i]=false;
         }
 
     }
+
     public List<List<String>> solveNQueens(int n) {
+        boolean vis[][]=new boolean [n][n];
 
-        boolean [][]vis=new boolean[n][n];
-
-        func(0,n,vis);
-
-        return res;
-        
+        func(0,n,new ArrayList<>(),vis);
+        return ans;
     }
 }
