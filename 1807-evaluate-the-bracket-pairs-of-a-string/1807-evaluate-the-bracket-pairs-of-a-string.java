@@ -1,48 +1,43 @@
 class Solution {
     public String evaluate(String s, List<List<String>> k) {
-      boolean ob=false;
-      StringBuilder str=new StringBuilder(); 
+        boolean ob = false;
+        StringBuilder str = new StringBuilder();
 
-      StringBuilder ans= new StringBuilder();
+        StringBuilder ans = new StringBuilder();
 
-      Map<String,String> mp=new HashMap<>();
-      for(List<String> arr:k)
-      {
-       
-        mp.put(arr.get(0),arr.get(1));
-      }
+        Map<String, String> mp = new HashMap<>();
+        for (List<String> arr : k) {
 
-      for(int i=0;i<s.length();++i)
-      {
-        char cur=s.charAt(i);
-        if(cur==')') {
-            ob=false;
-            
-            if(mp.containsKey(str.toString()))
-            {
-                ans.append(mp.get(str.toString()));
+            mp.put(arr.get(0), arr.get(1));
+        }
 
-            }else{
-                ans.append('?');
+        for (int i = 0; i < s.length(); ++i) {
+            char cur = s.charAt(i);
+            if (cur == ')') {
+                ob = false;
+
+                if (mp.containsKey(str.toString())) {
+                    ans.append(mp.get(str.toString()));
+
+                } else {
+                    ans.append('?');
+                }
+                str.setLength(0);
+                continue;
             }
-            str=new StringBuilder();
-            continue;
-        }
-        if(ob)
-        {
-            str.append(cur);
-            continue;
-        }
-        if(cur=='('){
-            ob=true;
-            continue;
+            if (ob) {
+                str.append(cur);
+                continue;
+            }
+            if (cur == '(') {
+                ob = true;
+                continue;
+            }
+
+            ans.append(cur);
         }
 
-        ans.append(cur);
-      } 
-
-      return ans.toString();
-
+        return ans.toString();
 
     }
 
