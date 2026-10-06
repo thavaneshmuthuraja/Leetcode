@@ -1,6 +1,5 @@
 class Solution {
     public int minAddToMakeValid(String s) {
-        Deque<Character> st=new ArrayDeque<>();
             int open =0,ans=0;
         for(int i=0;i<s.length();++i)
         {
