@@ -1,9 +1,8 @@
 class Solution {
     public int minAddToMakeValid(String s) {
             int open =0,ans=0;
-        for(int i=0;i<s.length();++i)
+        for(char cur:s.toCharArray())
         {
-            char cur=s.charAt(i);
             if(cur=='(') open++;
             else 
             {
