@@ -8,23 +8,16 @@ class Solution {
         }
 
         Arrays.sort(nums);
-
-        int l=0,r=n-1;
-        boolean turn=true;
-
-        while(l<=r)
+        int s1=0,s2=0;
+        for(int i=0;i<n/2;++i)
         {
-            if(turn){
-                sum+=(nums[r]*nums[r]);
-                r--;
-                turn=false;
-            }else
-            {
-                sum-=(nums[l]*nums[l]);
-                l++;
-                turn=true;
-            }
+            sum-=(nums[i]*nums[i]);
         }
+        for(int i=n/2;i<n;++i)
+        {
+            sum+=(nums[i]*nums[i]);
+        }
+
         return sum;
     }
 }
