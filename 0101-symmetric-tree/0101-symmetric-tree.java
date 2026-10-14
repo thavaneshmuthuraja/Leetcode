@@ -15,21 +15,21 @@
  */
 class Solution {
 
-    boolean func(TreeNode root1,TreeNode root2)
+    boolean func(TreeNode l,TreeNode r)
     {
-        if(root1==null && root2==null) return true;
+        if(l==null && r==null)
+        {
+            return true;
+        }
 
-        if(root1==null || root2==null) return false;
-        
-        if(root1.val!=root2.val) return false;
-    
+        if(l==null || r==null)
+        {
+            return false;
+        }
 
-        return func(root1.left,root2.right) && func(root1.right,root2.left);
-
+        return l.val==r.val && func(l.left,r.right) && func(l.right,r.left);
     }
     public boolean isSymmetric(TreeNode root) {
-
         return func(root.left,root.right);
-        
     }
 }
