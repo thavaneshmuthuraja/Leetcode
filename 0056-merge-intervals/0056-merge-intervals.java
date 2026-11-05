@@ -14,6 +14,6 @@ class Solution {
                 res[in][1]=Math.max(res[in][1],intervals[i][1]);
             }
         }
-        return java.util.Arrays.copyOf(res,in+1);
+        return Arrays.copyOf(res,in+1);
     }
 }
